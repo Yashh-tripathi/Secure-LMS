@@ -59,3 +59,21 @@ const coursePurchaseSchema = new mongoose.Schema({
 coursePurchaseSchema.index({user: 1, course: 1});
 coursePurchaseSchema.index({status: 1});
 coursePurchaseSchema.index({createdAt: -1});
+
+
+coursePurchaseSchema.virtual('isRefundable').get(function(){
+    if(this.status === 'completed') return false;
+    const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+    return this.createdAt > thirtyDaysAgo;
+});
+
+/* Method to process the refund */
+coursePurchaseSchema.methods.processRefund = async function(reason, amount){
+    this.status = 'refunded';
+    this.reason = reason;
+    this.refundAmount = amount || this.amount;
+    return this.save();
+}
+
+export const CoursePurchase = mongoose.model('CoursePurchase', coursePurchaseSchema);
+
