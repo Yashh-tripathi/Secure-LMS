@@ -1,0 +1,30 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "backend for LMS application",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --ext js,json,env index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "yes"
+  },
+  "keywords": [
+    "lms",
+    "paymentgateway"
+  ],
+  "author": "Yash Tripathi",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.6.1",
+    "morgan": "^1.10.1"
+  }
+}
